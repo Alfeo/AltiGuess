@@ -1,0 +1,16 @@
+elevation_homepage:
+    path:     /
+    defaults: { _controller: ElevationBundle:Default:index }
+
+elevation_game:
+    path:     /user/game
+    defaults: { _controller: ElevationBundle:Default:game }
+
+user_dashboard:
+    path:     /user/dashboard
+    defaults: { _controller: ElevationBundle:Dashboard:index }
+
+game_verification:
+    path:     /user/dashboard/verification
+    defaults: { _controller: ElevationBundle:Default:verification }
+

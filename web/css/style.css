@@ -1,0 +1,37 @@
+#pano
+{
+	position:absolute;
+	top:0%;
+	left:0%;
+	height:100%;
+	width:100%;
+}
+
+.afternav
+{
+	width:100%;
+	height:15px;
+	background-color:#286090;
+	z-index:3;
+	top:50px;
+	position:absolute;
+	left:0%;
+}
+
+.img-style-paralax
+{
+	position:absolute;
+	top:0%;
+	left:0%;
+	height:100%;
+	width:100%;
+	z-index:-1;
+}
+
+.register_div
+{
+	margin-top:100px;
+	min-height:300px;
+	background-color:#FFFFFF;
+	padding:15px;
+}
