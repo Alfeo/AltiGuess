@@ -5,6 +5,7 @@ namespace ElevationBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 use ElevationBundle\Entity\Road;
 use ElevationBundle\Entity\Answer;
 
@@ -37,6 +38,11 @@ class DefaultController extends Controller
         $score = $request->request->get('score');
         $thisRoad = $request->request->get('road');
 
+        if ($round == "1")
+        {
+            $round = 1;
+        }
+
         if ($score != null)
         {
             $oldReponse = $request->request->get('correct');   
@@ -59,6 +65,12 @@ class DefaultController extends Controller
 
             elseif ($oldReponse - $estimation >= 0 || $estimation - $oldReponse >= 0)
                 $score = $score + 1000;
+
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success',
+                'Vous aviez éstimé une hauteur de '.$estimation.' mètres, la hauteur exact était de '.$oldReponse.' mètres.')
+            ;
         }
         else
         {

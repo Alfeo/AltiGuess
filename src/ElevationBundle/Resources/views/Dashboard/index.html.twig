@@ -14,4 +14,89 @@
 
 {% block body %}
 
+	<img src="{{ asset('img/dash.jpg') }}" class="img-style-paralax">
+
+	<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-4">
+			<div class="col-md-12 main-div relative card">
+				<div class="col-md-8 col-md-offset-2 avatar">
+					<img class="img-style-full" src="{{ asset('img/avatar.png') }}">
+				</div>
+				<div class="col-md-12 center">
+					<h3><strong>{{ app.user.username }}</strong></h3>
+				</div>
+				<div class="col-md-12 score-div">
+					<div class="col-md-12">
+						<div class="col-md-4 center">
+							<p><strong>Score</strong></p>
+						</div>
+						<div class="col-md-8 center">
+							<p><strong>Seed</strong></p>
+						</div>
+					</div>
+					{% for answer in allAnswers %}
+						<div class="col-md-12">
+							<div class="col-md-4 center">
+								<p>{{ answer.score }}</p>
+							</div>
+							<div class="col-md-8 center">
+								<p>{{ answer.seed }}</p>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="col-md-12 main-div relative card">
+				<img class="img-style-full" src="{{ asset('img/part2.png') }}">
+				<div class="col-md-12 filter">
+				</div>
+				<a class="btn btn-primary action-but" href="{{ path('elevation_game') }}">1 joueur</a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="col-md-12 main-div relative card">
+				<img class="img-style-full" src="{{ asset('img/part3.png') }}">
+				<div class="col-md-12 filter">
+				</div>
+				<a class="btn btn-warning action-but" data-toggle="modal" data-target="#myModal">Seed</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Entrez un Seed</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<form method="POST" action="{{ path('elevation_game') }}">
+	        	<input type="hidden" name="round" value="1">
+	        	<input type="text" name="road">
+	      </div>
+	      <div class="modal-footer">
+	        <input type="submit" class="btn btn-primary" value="Valider">
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			$(".action-but").mouseenter(function()
+			{
+				$(this).parent().children(".filter").css("opacity", 0.4);
+			});
+			$(".action-but").mouseleave(function()
+			{
+				$(this).parent().children(".filter").css("opacity", 0.7);
+			});
+		});
+	</script>
+
 {% endblock %}
