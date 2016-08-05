@@ -100,12 +100,37 @@ class DefaultController extends Controller
 
             $road = new Road();
 
+            $antiDoublon = [];
+
             while($compteur < 5)
             {
                 $countSpot = count($em->getRepository('ElevationBundle:Spot')->findAll());
-                $idSpot = rand(1, $countSpot);
 
-                $thisSpot = $em->getRepository('ElevationBundle:Spot')->findOneById($idSpot);
+                $notDoublon = 0;
+                $doublon = 0;
+
+                while ($notDoublon == 0)
+                {
+                    $idSpot = rand(1, $countSpot);
+                    while (isset($antiDoublon[$doublon]))
+                    {
+                        if ($antiDoublon[$doublon] == $idSpot)
+                            $notDoublon = 1;
+                        $doublon++;
+                    }
+                    if ($notDoublon != 1)
+                    {
+                        array_push($antiDoublon, $idSpot);
+                        $notDoublon = 1;
+                    }
+                    else
+                    {
+                        $notDoublon = 0;
+                        $doublon = 0;
+                    }
+                }
+
+                $thisSpot = $em->getRepository('ElevationBundle:Spot')->findOneById($antiDoublon[$compteur]);
                 
                 if ($compteur == 0)
                     $road->setRound1($thisSpot->getId());
